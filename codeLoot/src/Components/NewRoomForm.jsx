@@ -1,43 +1,13 @@
 import React from "react";
 import BtnGreen from "./UI/BtnGreen";
 import BtnBlack from "./UI/BtnBlack";
+import { Link, Route, Routes } from "react-router-dom";
 
 const NewRoomForm = () => {
   return (
-    <div className="w-full text-[27px] bg-black font-monte text-white h-[100vh] flex flex-col justify-center items-center py-5">
-      {/* <form className="flex flex-col px-5 w-[40rem] gap-10 items-start">
-        <h2 className="font-sans tracking-wide font-extrabold">Rick Rules</h2>
-        <div className="flex  w-full justify-between text-[1.5rem]">
-          <label for="topic">Topic</label>
-          <select id="topic" name="topic">
-            <option value="array">array</option>
-            <option value="loop">loop</option>
-            <option value="string">string</option>
-            <option value="graphs">graphs</option>
-          </select>
-        </div>
-        
-          <label>Difficulty</label>
-          <input type="text" placeholder="Enter Topic"></input>
-        </div>
-        <div className="flex w-full justify-between text-[1.5rem]">
-          <label>No of Question</label>
-          <input type="text" placeholder="Enter Topic"></input>
-        </div>
-        <div className="flex w-full justify-between text-[1.5rem]">
-          <label>Schedule Time</label>
-          <input type="text" placeholder="Enter Topic"></input>
-        </div>
-        <div className="flex w-full justify-between text-[1.5rem]">
-          <label>Duration</label>
-          <input type="text" placeholder="Enter Topic"></input>
-        </div>
-        <div className="flex text-[1.5rem] w-[100%] justify-between">
-          <button>Cancel</button>
-          <button className="bg-primary_green text-black">Create Room</button>
-        </div>
-      </form> */}
-      <form className="grid-cols-2  text-[27px] pt-[5rem] grid px-5 w-[50rem] gap-10 items-start">
+    <div className="w-full  bg-black font-monte text-white h-[100vh] flex flex-col justify-center items-center py-5">
+
+      <form className="grid-cols-2  text-[1.25rem] pt-[6rem] grid px-5 w-[50rem] gap-7 items-start">
         <h2 className="font-sans col-start-1 col-span-2 tracking-wide font-extrabold">
           Rick Rules
         </h2>
@@ -52,9 +22,9 @@ const NewRoomForm = () => {
 
         <label for="difficulty">Difficulty</label>
         <div id="difficulty" className="flex justify-between gap-5">
-          <BtnGreen btnLabel="Easy" className=""></BtnGreen>
-          <BtnBlack btnLabel="Medium" className=""></BtnBlack>
-          <BtnBlack btnLabel="Hard" className=""></BtnBlack>
+          <div className='py-2 px-8 text-[12px] font-poppins flex items-center justify-center tracking-wide rounded-md bg-primary_green text-black'>Easy</div>
+          <div className='py-2 px-8 text-[12px] font-poppins flex items-center justify-center tracking-wide rounded-md bg-primary_gray text-white'>Medium</div>
+          <div className='py-2 px-8 text-[12px] font-poppins flex items-center justify-center tracking-wide rounded-md bg-primary_gray text-white'>Dark</div>
         </div>
 
         <label for="questions">No of Question</label>
@@ -68,19 +38,21 @@ const NewRoomForm = () => {
 
         <label for="duration">Duration</label>
         <div id="durationculty" className="flex gap-5 justify-between">
-          <BtnGreen btnLabel="15" className=""></BtnGreen>
-          <BtnBlack btnLabel="30" className=""></BtnBlack>
-          <BtnBlack btnLabel="45" className=""></BtnBlack>
-          <BtnBlack btnLabel="60" className=""></BtnBlack>
+          <div className='py-2 px-8 text-[12px] font-poppins flex items-center justify-center tracking-wide rounded-md bg-primary_green text-black'>15</div>
+          <div className='py-2 px-8 text-[12px] font-poppins flex items-center justify-center tracking-wide rounded-md bg-primary_gray text-white'>30</div>
+          <div className='py-2 px-8 text-[12px] font-poppins flex items-center justify-center tracking-wide rounded-md bg-primary_gray text-white'>45</div>
+          <div className='py-2 px-8 text-[12px] font-poppins flex items-center justify-center tracking-wide rounded-md bg-primary_gray text-white'>60</div>
+         
         </div>
 
-        <div className="flex gap-5 text-[1.5rem] items-center col-span-2">
+        <div className="flex gap-5 text-[1rem] items-center col-span-2">
           <input id="privateRoom" type="checkbox" />
           <span>Private Room</span>
         </div>
         
-        <button className="border-2 border-white rounded-md">Cancel</button>
-        <BtnGreen btnLabel='Create Room'/>
+        <button className="text-[1rem] py-2 border-white rounded-md bg-primary_green text-black">Create Room</button>
+        <Link to='/' className="text-[1rem] text-center py-2 border-2 border-white rounded-md">Cancel</Link>
+
       </form>
     </div>
   );

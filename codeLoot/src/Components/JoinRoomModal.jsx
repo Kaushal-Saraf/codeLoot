@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Link } from "react-router-dom";
 const JoinRoomModal = ({ open, onClose }) => {
   if (!open) return null;
   return ReactDOM.createPortal(
@@ -7,9 +8,9 @@ const JoinRoomModal = ({ open, onClose }) => {
       <div className="h-[15rem] w-[20rem] bg-primary_gray flex flex-col gap-5 items-center justify-center">
         <div className="text-primary_green font-monte">Enter Room Code</div>
         <input type="text"></input>
-        <div className="py-2 px-10 text-[12px] font-poppins tracking-wide rounded-md bg-primary_green text-black">
+        <Link to='/joinroom' className="py-2 px-10 text-[12px] font-poppins tracking-wide rounded-md bg-primary_green text-black">
           Join Room
-        </div>
+        </Link>
         <div
           className="py-2 px-10 text-[12px] font-poppins tracking-wide rounded-md bg-primary_gray text-white border-2 border-white"
           onClick={onClose}
