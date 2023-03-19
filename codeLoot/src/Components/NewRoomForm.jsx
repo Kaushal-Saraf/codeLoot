@@ -10,17 +10,22 @@ const NewRoomForm = () => {
   const [duration, setDuration] = useState("");
   const [question, setQuestion] = useState("");
   const [startTime, setStartTime] = useState("");
+  const [startTimeHour, setStartTimeHour] = useState("");
+  const [startTimeMinute, setStartTimeMinute] = useState("");
+  
   const [difficulty, setDifficulty] = useState("");
   const unique_id = uuid();
   const small_id = unique_id.slice(0,8)
   const newRoomObjectFunction = () => {
-    
     const newRoomObject = {
       id:small_id,
       topic: topic,
       duration: duration,
       question: question,
-      startTime: startTime,
+      startTime:startTime,
+      startTimeHour: startTimeHour,
+      startTimeMinute: startTimeMinute,
+      startTimeSecound: "00",
       difficulty: difficulty,
     };
     dispatch({
@@ -103,7 +108,10 @@ const NewRoomForm = () => {
           id="roomTime"
           className="flex gap-5"
           onChange={(e) => {
-            setStartTime(e.target.value);
+            let [TimeHour,TimeMinute]=e.target.value.split(":");
+            setStartTime(e.target.value)
+            setStartTimeHour(TimeHour)
+            setStartTimeMinute(TimeMinute)
           }}
         >
           <input type="date" id="roomtimeDate" name="roomtimeDate" />

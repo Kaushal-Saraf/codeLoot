@@ -3,10 +3,21 @@ import RoomPageQuestionSection from './RoomPageQuestionSection'
 import RoomPageQuestionDisplaySection from './RoomPageQuestionDisplaySection'
 import RoomPageEditorSection from './RoomPageEditorSection'
 import LeaderBoardComponent from './LeaderBoardComponent'
+import WaitingRoomModal from './WaitingRoomModal'
+import { useState } from 'react'
 const RoomPage = () => {
-    
+  const [waitingRoomRequest, setWaitingRoomRequest] = useState(true);
+
   return (
     <div className='flex w-full min-h-screen bg-primary_gray text-primary_green h-auto'>
+       {
+        <WaitingRoomModal
+        openWaitingRoomModal={waitingRoomRequest}
+        onCloseWaitingRoomModal={() => {
+            setWaitingRoomRequest(!waitingRoomRequest);
+          }}
+        />
+      }
      <RoomPageQuestionSection/>
      <RoomPageQuestionDisplaySection/>
      <RoomPageEditorSection/>

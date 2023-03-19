@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import BtnGreen from "./UI/BtnGreen";
-import BtnBlack from "./UI/BtnBlack";
 import ActiveRooms from "./ActiveRooms";
 import JoinRoomModal from "./JoinRoomModal";
 import NewRoomForm from "./NewRoomForm";
