@@ -8,6 +8,8 @@ module.exports = {
         "monte": ["Montserrat", "sans-serif"],
         "poppins": ["Poppins", "sans-serif"],
         "roboto": ["Roboto", "sans-serif"],
+        "inter":['Inter', 'sans-serif'],
+        
       },
       colors:{
         primary_gray:"#18181B",

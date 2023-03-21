@@ -1,36 +1,77 @@
 import React from "react";
-import CodeMirror from "@uiw/react-codemirror"
+import CodeMirror from "@uiw/react-codemirror";
 import { useState } from "react";
-import {javascript} from "@codemirror/lang-javascript"
-import {python} from "@codemirror/lang-python"
-import {dracula} from "@uiw/codemirror-theme-dracula"
+import { javascript } from "@codemirror/lang-javascript";
+import axios from "axios";
+import { python } from "@codemirror/lang-python";
+import { dracula } from "@uiw/codemirror-theme-dracula";
 import { ViewUpdate } from "@codemirror/view";
+import { useStateValue } from "../context/stateProvider";
 const RoomPageEditorSection = () => {
-const [code,setCode]=useState("")
-const onChange=React.useCallback((value,ViewUpdate)=>{
-  console.log("value",value)
-  setCode(value)
-},[])
+  const [code, setCode] = useState("");
+  const [{newRoom,activeQuestion},dipatch]=useStateValue()
+  const userId="123"
+  const onChange = React.useCallback((value, ViewUpdate) => {
+    setCode(value);
+  }, []);
+  const runCode = async () => {
+    console.log("first");
+    const url = "https://devs-clash.onrender.com/python";
+    const body = { code: code,id:userId,roomId:newRoom.id,Q:activeQuestion };
+
+    axios
+      .post(url, body, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        // Do something with the response data
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
   return (
-    <div className="bg-primary_gray flex-col border-2 w-[32rem] border-white h-[auto] justify-start px-1 gap-4 pt-[5rem]">
+    <div className="bg-primary_gray font-monte flex-col border-2 w-[32rem] border-white h-[auto] justify-start px-1 gap-4 pt-[5rem]">
       <div className="w-auto items-center justify-start flex gap-2 mb-[5px]">
         <label htmlFor="topic">Language </label>
         <select id="topic" name="topic">
+          <option value="array">Select Language</option>
           <option value="array">C++</option>
           <option value="loop">Python</option>
           <option value="string">Java</option>
           <option value="graphs">Js</option>
         </select>
+        <div className="ml-auto">00:02:30</div>
       </div>
-      
-      <CodeMirror value="console.log('hello')"
-      height="auto"
-      width="30rem"
-      
-      theme={dracula}
-      onChange={onChange}
-      extensions={[python({})]}
+
+      <CodeMirror
+        value={`import sys;
+
+def add(a):
+  # enter your code here
+
+if __name__ == "__main__":
+  a = int(sys.argv[1])
+  result = int(sys.argv[3])
+  print(add(a) == result)
+`}
+        height="auto"
+        width="30rem"
+        // option={{mode:'python'}}
+        theme={dracula}
+        onChange={onChange}
+        extensions={[python({})]}
       ></CodeMirror>
+      <div
+        onClick={runCode}
+        className="absolute bottom-[5rem] bg-primary_green text-black px-4 py-1 rounded-lg font-monte"
+      >
+        {" "}
+        Submit Now
+      </div>
     </div>
   );
 };

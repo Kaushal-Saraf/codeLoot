@@ -1,41 +1,25 @@
 import React, { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import CreateRoomModal from "./CreateRoomModal";
-import {useStateValue} from '../context/stateProvider'
-import { v4 as uuid } from 'uuid';
+import { useStateValue } from "../context/stateProvider";
+import { v4 as uuid } from "uuid";
+import { BsPencilSquare } from "react-icons/bs";
+import axios from "axios";
 const NewRoomForm = () => {
-  const [{newRoom},dispatch]=useStateValue()
+  const [{ newRoom, questions }, dispatch] = useStateValue();
   const [createRoomRequest, setcreateRoomRequest] = useState(false);
   const [topic, setTopic] = useState("");
   const [duration, setDuration] = useState("");
-  const [question, setQuestion] = useState("");
+  const [noOfQuestions, setNoOfQuestonsQuestions] = useState("");
   const [startTime, setStartTime] = useState("");
   const [startTimeHour, setStartTimeHour] = useState("");
   const [startTimeMinute, setStartTimeMinute] = useState("");
-  
+
   const [difficulty, setDifficulty] = useState("");
   const unique_id = uuid();
-  const small_id = unique_id.slice(0,8)
-  const newRoomObjectFunction = () => {
-    const newRoomObject = {
-      id:small_id,
-      topic: topic,
-      duration: duration,
-      question: question,
-      startTime:startTime,
-      startTimeHour: startTimeHour,
-      startTimeMinute: startTimeMinute,
-      startTimeSecound: "00",
-      difficulty: difficulty,
-    };
-    dispatch({
-      type:"SET_NEW_ROOM",
-      newRoom:newRoomObject
-    })
-    console.log(newRoomObject)
-  };
+  const small_id = unique_id.slice(0, 8);
   return (
-    <div className="w-full  bg-black font-monte text-white h-[auto] flex flex-col justify-center items-center p-4">
+    <div className="w-full  bg-black font-inter text-white h-[auto] flex flex-col justify-center items-center p-4">
       {
         <CreateRoomModal
           openRoomModal={createRoomRequest}
@@ -44,78 +28,84 @@ const NewRoomForm = () => {
           }}
         />
       }
-      <form className="grid-cols-2  text-[1.25rem] pt-[4rem] grid px-5 w-[50rem] gap-7 items-start">
-        <h2 className="font-sans col-start-1 col-span-2 tracking-wide font-extrabold">
-          Rick Rules
+      <form className="grid-cols-2 items-center text-[1.25rem] pt-[4rem] grid px-5 w-[50rem] gap-9 ">
+        <h2 className=" col-start-1 text-[35px] flex items-center gap-3 col-span-2 tracking-wide mb-4">
+          Rick Rules <BsPencilSquare className="text-[18px]" />
         </h2>
 
         <label for="topic">Topic</label>
-        <select required
+        <select
+          className="text-[16px] text-[#999999] bg-[#363636] py-2 px-3 items-center"
+          required
           id="topic"
           name="topic"
           onChange={(e) => {
             setTopic(e.target.value);
           }}
         >
-          <option value="array">Array</option>
-          <option value="loop">Loop</option>
-          <option value="string">String</option>
-          <option value="graphs">Graphs</option>
+          <option value=" " className="text-[#999999] focus:white bg-blue">
+            Select Topic
+          </option>
+          <option value="Array">Array</option>
+          <option value="Loop">Loop</option>
+          <option value="String">String</option>
+          <option value="Graphs">Graphs</option>
         </select>
 
-        <label for="duration">Duration</label>
+        <label  for="duration">Duration</label>
         <div
           id="duration"
           onChange={(e) => {
             setDuration(e.target.value);
           }}
-          className="flex justify-between gap-5"
+          className="flex text-[16px] justify-between  gap-5"
         >
-          <input type="radio" id="quater" name="radioDuration" value="15" />
-          <label for="quater">15</label>
+          <input className=""type="radio" id="quater" name="radioDuration" value="15" />
+          <label className="text-[#999999]" for="quater">15</label>
 
-          <input type="radio" id="half" name="radioDuration" value="30" />
-          <label for="half">30</label>
+          <input className=""type="radio" id="half" name="radioDuration" value="30" />
+          <label className="text-[#999999]" for="half">30</label>
 
-          <input type="radio" id="semi" name="radioDuration" value="45" />
-          <label for="semi">45</label>
+          <input className=""type="radio" id="semi" name="radioDuration" value="45" />
+          <label className="text-[#999999]" for="semi">45</label>
 
-          <input type="radio" id="full" name="radioDuration" value="60" />
-          <label for="full">60</label>
+          <input className=""type="radio" id="full" name="radioDuration" value="60" />
+          <label className="text-[#999999]" for="full">60</label>
         </div>
 
         <label for="questions">No of Question</label>
         <select
+        className="py-2 text-[#999999] bg-primary_gray_light"
           id="questions"
           name="number"
           onChange={(e) => {
-            setQuestion(e.target.value);
+            setNoOfQuestonsQuestions(e.target.value);
           }}
         >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
+          <option className="" value="1">1</option>
+          <option className=""value="2">2</option>
+          <option className=""value="3">3</option>
+          <option className=""value="5">5</option>
+          <option className=""value="6">6</option>
+          <option className=""value="7">7</option>
+          <option className=""value="8">8</option>
+          <option className=""value="9">9</option>
+          <option className=""value="10">10</option>
         </select>
 
         <label for="roomTime">Schedule Time</label>
-        <div
+        <div 
           id="roomTime"
-          className="flex gap-5"
+          className="flex text-[16px] gap-5"
           onChange={(e) => {
-            let [TimeHour,TimeMinute]=e.target.value.split(":");
-            setStartTime(e.target.value)
-            setStartTimeHour(TimeHour)
-            setStartTimeMinute(TimeMinute)
+            let [TimeHour, TimeMinute] = e.target.value.split(":");
+            setStartTime(e.target.value);
+            setStartTimeHour(TimeHour);
+            setStartTimeMinute(TimeMinute);
           }}
         >
-          <input type="date" id="roomtimeDate" name="roomtimeDate" />
-          <input type="time" id="roomTimeTime" name="roomTimeTime" />
+          <input className="py-2  text-[#999999] bg-[#363636]"type="date" id="roomtimeDate" name="roomtimeDate" />
+          <input className="py-2 text-[#999999] bg-[#363636]"type="time" id="roomTimeTime" name="roomTimeTime" />
         </div>
 
         <label for="difficulty">Difficulty</label>
@@ -128,7 +118,7 @@ const NewRoomForm = () => {
           }}
         >
           <input type="radio" id="easy" name="radioDifficulty" value="Easy" />
-          <label for="easy">Easy</label>
+          <label className="bg-[#363636] text-[#999999]" for="easy">Easy</label>
 
           <input
             type="radio"
@@ -136,10 +126,10 @@ const NewRoomForm = () => {
             name="radioDifficulty"
             value="Medium"
           />
-          <label for="medium">Medium</label>
+          <label className="bg-[#363636] text-[#999999]" for="medium">Medium</label>
 
           <input type="radio" id="hard" name="radioDifficulty" value="Hard" />
-          <label for="hard">Hard</label>
+          <label className="bg-[#363636] text-[#999999]" for="hard">Hard</label>
         </div>
 
         <div className="flex gap-5 text-[1rem] items-center col-span-2">
@@ -149,17 +139,56 @@ const NewRoomForm = () => {
 
         <button
           onClick={(e) => {
-            event.preventDefault();
-            newRoomObjectFunction();
+            e.preventDefault();
+            console.log("first creation on obj")
+            dispatch({
+              type: "SET_NEW_ROOM",
+              newRoom: {
+                id: small_id,
+                topic: topic,
+                duration: duration,
+                noOfQuestions: noOfQuestions,
+                startTime: startTime,
+                startTimeHour: startTimeHour,
+                startTimeMinute: startTimeMinute,
+                startTimeSecound: "00",
+                difficulty: difficulty,
+                participant: [
+                  { id: "123", solved: Array(noOfQuestions).fill(0) },
+                ],
+                questions:[],
+                winner:""
+              },
+            });
             setcreateRoomRequest(!createRoomRequest);
+            
+
+
+            axios
+              .post("https://devs-clash.onrender.com/send",  { ...newRoom }, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              })
+              .then((response) => {
+               console.log(newRoom)
+                console.log(Object.values(response));
+                dispatch({
+                  type: "SET_QUESTIONS",
+                  questions: Object.values(response.data.questions),
+                });
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
           }}
-          className="text-[1rem] py-2 border-white rounded-md bg-primary_green text-black"
+          className="py-[6px] px-[36px] text-[16px]  font-medium font-inter tracking-wide rounded-md items-center justify-center flex bg-primary_green text-black"
         >
           Create Room
         </button>
         <Link
           to="/"
-          className="text-[1rem] text-center py-2 border-2 border-white rounded-md"
+          className="py-[6px] px-[36px] text-[16px] font-medium font-inter tracking-wide rounded-md items-center justify-center flex border-2 border-white text-white"
         >
           Cancel
         </Link>

@@ -3,11 +3,11 @@ import ActiveRooms from "./ActiveRooms";
 import JoinRoomModal from "./JoinRoomModal";
 import NewRoomForm from "./NewRoomForm";
 import { Link, Route, Routes } from "react-router-dom";
-
+import { BsArrowRightCircle } from "react-icons/bs";
 const DisplayPage = () => {
   const [joinRoomRequest, setJoinRoomRequest] = useState(false);
   return (
-    <main className="w-[full] h-[auto] pt-[4rem] px-[2rem] bg-primary_gray flex flex-col items-center text-white">
+    <main className="w-[full] h-[auto] pt-[5.25rem] px-[2rem] bg-primary_gray flex flex-col items-center text-white">
       {
         <JoinRoomModal
           open={joinRoomRequest}
@@ -16,21 +16,24 @@ const DisplayPage = () => {
           }}
         />
       }
-      <h2 className="text-[25px] font-semibold">You Are Just One CLick</h2>
-      <h2 className="text-[25px] font-semibold">Away From BattleField</h2>
-      <p className="text-[1rem] font-monte mt-[10px]">
+      <h2 className="text-[26px] leading-5 font-semibold">
+        You Are Just One Click
+      </h2>
+      <h2 className="text-[26px] font-semibold">Away From BattleField</h2>
+      <p className="text-[14px] font-inter mt-[11px]">
         One piece is the best piece of fiction ever created.If you don't agree I
         will personally hunt you down.
       </p>
       <div className="flex mt-[30px] gap-5">
         <Link
           to="/createroom"
-          className="py-2 px-10 text-[12px] font-poppins tracking-wide rounded-md items-center justify-center flex bg-primary_green text-black"
+          className="py-[6px] px-[36px] text-[16px] font-medium font-inter tracking-wide rounded-md items-center justify-center flex bg-primary_green text-black"
         >
-          Create Room
+          <p className="text-black">Create Room</p>
+          {/* <BsArrowRightCircle className="bg-black"/> */}
         </Link>
         <div
-          className="py-2 px-10 text-[12px] font-poppins tracking-wide rounded-md bg-primary_gray text-white border-2 border-white"
+          className="py-[6px] px-[36px] text-[16px] font-medium font-inter tracking-wide rounded-md bg-primary_gray text-white border-2 border-white"
           onClick={() => {
             setJoinRoomRequest(!joinRoomRequest);
           }}
@@ -38,11 +41,13 @@ const DisplayPage = () => {
           Join Room
         </div>
       </div>
-      <div className="w-full flex text-[1rem] my-4 font-bold items-start">
-        Active Rooms
-      </div>
-      <div className="flex gap-5 flex-wrap">
-        <ActiveRooms />
+      <div className="">
+        <div className="w-full flex text-[20px] mt-[50px] mb-5 font-bold items-start">
+          Active Rooms
+        </div>
+        <div className="flex w-full flex-wrap">
+          <ActiveRooms />
+        </div>
       </div>
     </main>
   );

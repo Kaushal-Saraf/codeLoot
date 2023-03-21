@@ -1,14 +1,14 @@
 import React from "react";
+import {RemoveScrollBar} from 'react-remove-scroll-bar';
+import { useStateValue } from "../context/stateProvider";
 const RoomPageQuestionDisplaySection = () => {
+  const [{questions,activeQuestion},dispatch]=useStateValue()
   return (
-    <div className="bg-primary_gray_light w-[20rem] py-5 px-2 gap-4 flex text-[1rem] tracking-wide flex-col justify-start">
-      <div className="text-[1.5rem]">1. Two Sums</div>
-      <div className="border-primary_green py-4 overflow-y-scroll h-full border-2 rounded-lg px-4 text-primary_green">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, vel eos
-        minus beatae ipsum maiores magnam nemo, in doloribus voluptate,
-        dignissimos corrupti vitae. Earum dolorum quasi neque, commodi nisi
-        explicabo amet ea, dolorem, rem ipsam cum distinctio voluptas esse?
-        Doloremque officia aspernatur nam omnis at!
+    <div className="bg-primary_gray_light font-poppins w-[20rem] pt-[5rem] px-2 gap-4 flex text-[1rem] tracking-wide flex-col justify-start">
+      
+      <RemoveScrollBar/>
+      <div>
+       {questions[activeQuestion]?.st}
       </div>
     </div>
   );
