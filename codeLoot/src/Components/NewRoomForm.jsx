@@ -15,7 +15,6 @@ const NewRoomForm = () => {
   const [startTimeHour, setStartTimeHour] = useState("");
   const [startTimeMinute, setStartTimeMinute] = useState("");
   const [roomType, setRoomType] = useState("public");
-
   const [difficulty, setDifficulty] = useState("");
   const unique_id = uuid();
   const small_id = unique_id.slice(0, 8);
@@ -220,7 +219,6 @@ const NewRoomForm = () => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            console.log("first creation on obj");
             dispatch({
               type: "SET_NEW_ROOM",
               newRoom: {
@@ -246,7 +244,21 @@ const NewRoomForm = () => {
             axios
               .post(
                 "https://devs-clash.onrender.com/send",
-                { ...newRoom },
+                { id: small_id,
+                  topic: topic,
+                  duration: duration,
+                  noOfQuestions: noOfQuestions,
+                  startTime: startTime,
+                  startTimeHour: startTimeHour,
+                  startTimeMinute: startTimeMinute,
+                  startTimeSecound: "00",
+                  difficulty: difficulty,
+                  roomType: roomType,
+                  participant: [
+                    { id: "123", solved: Array(noOfQuestions).fill(0) },
+                  ],
+                  questions: [],
+                  winner: "" },
                 {
                   headers: {
                     "Content-Type": "application/json",
