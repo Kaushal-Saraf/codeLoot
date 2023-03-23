@@ -11,7 +11,8 @@ export const initialState = {
   user: userInfo,
   newRoom:[],
   questions:[],
-  activeQuestion:0
+  activeQuestion:0,
+ 
 };
 const reducer = (state, action) => {
     switch (action.type) {
@@ -35,6 +36,12 @@ const reducer = (state, action) => {
             ...state,
             activeQuestion: action.activeQuestion,
           };
+          case "SET_FAKE":
+          return {
+            ...state,
+            fake: action.fake,
+          };
+          
       default:
         return state;
     }

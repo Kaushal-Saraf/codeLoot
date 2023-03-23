@@ -9,23 +9,24 @@ import { ViewUpdate } from "@codemirror/view";
 import { useStateValue } from "../context/stateProvider";
 const RoomPageEditorSection = () => {
   const [code, setCode] = useState("");
-  const [{newRoom,activeQuestion},dipatch]=useStateValue()
+  const [{newRoom,activeQuestion,fake},dipatch]=useStateValue()
   const userId="123"
   const onChange = React.useCallback((value, ViewUpdate) => {
     setCode(value);
   }, []);
   const runCode = async () => {
-    console.log("first");
+    console.log(code)
     const url = "https://devs-clash.onrender.com/python";
     const body = { code: code,id:userId,roomId:newRoom.id,Q:activeQuestion };
-
     axios
-      .post(url, body, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
+    .post(url, body, {
+      
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+        console.log("first")
         // Do something with the response data
         console.log(response.data);
       })
@@ -67,7 +68,7 @@ if __name__ == "__main__":
       ></CodeMirror>
       <div
         onClick={runCode}
-        className="absolute bottom-[5rem] bg-primary_green text-black px-4 py-1 rounded-lg font-monte"
+        className="absolute bottom-[5rem] cursor-pointer bg-primary_green text-black px-4 py-1 rounded-lg font-monte"
       >
         {" "}
         Submit Now
