@@ -23,7 +23,7 @@ const CreateRoomModal = ({ openRoomModal, onCloseRoomModal }) => {
           <div className="text-gray-500">Time</div>
           <div className="text-white">{newRoom?.startTime}</div>
           <div className="text-gray-500">Room Type</div>
-          <div className="text-white">Private</div>
+          <div className="text-white">{newRoom?.roomType}</div>
         </div>
         <Link
           to="/joinroom"

@@ -14,6 +14,7 @@ const NewRoomForm = () => {
   const [startTime, setStartTime] = useState("");
   const [startTimeHour, setStartTimeHour] = useState("");
   const [startTimeMinute, setStartTimeMinute] = useState("");
+  const [roomType, setRoomType] = useState("public");
 
   const [difficulty, setDifficulty] = useState("");
   const unique_id = uuid();
@@ -33,7 +34,7 @@ const NewRoomForm = () => {
           Rick Rules <BsPencilSquare className="text-[18px]" />
         </h2>
 
-        <label for="topic">Topic</label>
+        <label htmlFor="topic">Topic</label>
         <select
           className="text-[16px] text-[#999999] bg-[#363636] py-2 px-3 items-center"
           required
@@ -52,7 +53,7 @@ const NewRoomForm = () => {
           <option value="Graphs">Graphs</option>
         </select>
 
-        <label  for="duration">Duration</label>
+        <label htmlFor="duration">Duration</label>
         <div
           id="duration"
           onChange={(e) => {
@@ -60,41 +61,91 @@ const NewRoomForm = () => {
           }}
           className="flex text-[16px] justify-between  gap-5"
         >
-          <input className=""type="radio" id="quater" name="radioDuration" value="15" />
-          <label className="text-[#999999]" for="quater">15</label>
+          <input
+            className=""
+            type="radio"
+            id="quater"
+            name="radioDuration"
+            value="15"
+          />
+          <label className="text-[#999999]" htmlFor="quater">
+            15
+          </label>
 
-          <input className=""type="radio" id="half" name="radioDuration" value="30" />
-          <label className="text-[#999999]" for="half">30</label>
+          <input
+            className=""
+            type="radio"
+            id="half"
+            name="radioDuration"
+            value="30"
+          />
+          <label className="text-[#999999]" htmlFor="half">
+            30
+          </label>
 
-          <input className=""type="radio" id="semi" name="radioDuration" value="45" />
-          <label className="text-[#999999]" for="semi">45</label>
+          <input
+            className=""
+            type="radio"
+            id="semi"
+            name="radioDuration"
+            value="45"
+          />
+          <label className="text-[#999999]" htmlFor="semi">
+            45
+          </label>
 
-          <input className=""type="radio" id="full" name="radioDuration" value="60" />
-          <label className="text-[#999999]" for="full">60</label>
+          <input
+            className=""
+            type="radio"
+            id="full"
+            name="radioDuration"
+            value="60"
+          />
+          <label className="text-[#999999]" htmlFor="full">
+            60
+          </label>
         </div>
 
-        <label for="questions">No of Question</label>
+        <label htmlFor="questions">No of Question</label>
         <select
-        className="py-2 text-[#999999] bg-primary_gray_light"
+          className="py-2 text-[#999999] bg-primary_gray_light"
           id="questions"
           name="number"
           onChange={(e) => {
             setNoOfQuestonsQuestions(e.target.value);
           }}
         >
-          <option className="" value="1">1</option>
-          <option className=""value="2">2</option>
-          <option className=""value="3">3</option>
-          <option className=""value="5">5</option>
-          <option className=""value="6">6</option>
-          <option className=""value="7">7</option>
-          <option className=""value="8">8</option>
-          <option className=""value="9">9</option>
-          <option className=""value="10">10</option>
+          <option className="" value="1">
+            1
+          </option>
+          <option className="" value="2">
+            2
+          </option>
+          <option className="" value="3">
+            3
+          </option>
+          <option className="" value="5">
+            5
+          </option>
+          <option className="" value="6">
+            6
+          </option>
+          <option className="" value="7">
+            7
+          </option>
+          <option className="" value="8">
+            8
+          </option>
+          <option className="" value="9">
+            9
+          </option>
+          <option className="" value="10">
+            10
+          </option>
         </select>
 
-        <label for="roomTime">Schedule Time</label>
-        <div 
+        <label htmlFor="roomTime">Schedule Time</label>
+        <div
           id="roomTime"
           className="flex text-[16px] gap-5"
           onChange={(e) => {
@@ -104,11 +155,21 @@ const NewRoomForm = () => {
             setStartTimeMinute(TimeMinute);
           }}
         >
-          <input className="py-2  text-[#999999] bg-[#363636]"type="date" id="roomtimeDate" name="roomtimeDate" />
-          <input className="py-2 text-[#999999] bg-[#363636]"type="time" id="roomTimeTime" name="roomTimeTime" />
+          <input
+            className="py-2  text-[#999999] bg-[#363636]"
+            type="date"
+            id="roomtimeDate"
+            name="roomtimeDate"
+          />
+          <input
+            className="py-2 text-[#999999] bg-[#363636]"
+            type="time"
+            id="roomTimeTime"
+            name="roomTimeTime"
+          />
         </div>
 
-        <label for="difficulty">Difficulty</label>
+        <label htmlFor="difficulty">Difficulty</label>
 
         <div
           id="difficulty"
@@ -118,7 +179,9 @@ const NewRoomForm = () => {
           }}
         >
           <input type="radio" id="easy" name="radioDifficulty" value="Easy" />
-          <label className="bg-[#363636] text-[#999999]" for="easy">Easy</label>
+          <label className="bg-[#363636] text-[#999999]" htmlFor="easy">
+            Easy
+          </label>
 
           <input
             type="radio"
@@ -126,21 +189,38 @@ const NewRoomForm = () => {
             name="radioDifficulty"
             value="Medium"
           />
-          <label className="bg-[#363636] text-[#999999]" for="medium">Medium</label>
+          <label className="bg-[#363636] text-[#999999]" htmlFor="medium">
+            Medium
+          </label>
 
           <input type="radio" id="hard" name="radioDifficulty" value="Hard" />
-          <label className="bg-[#363636] text-[#999999]" for="hard">Hard</label>
+          <label className="bg-[#363636] text-[#999999]" htmlFor="hard">
+            Hard
+          </label>
         </div>
+        <label htmlFor="roomTypeBox">Room Type</label>
+        <div
+          id="roomTypeBox"
+          className="flex gap-5 justify-between"
+          onChange={(e) => {
+            setRoomType(e.target.value);
+          }}
+        >
+          <input type="radio" id="public" name="radioRoomType" value="public" />
+          <label className="bg-[#363636] text-[#999999]" htmlFor="public">
+            Public
+          </label>
 
-        <div className="flex gap-5 text-[1rem] items-center col-span-2">
-          <input id="privateRoom" type="checkbox" />
-          <span>Private Room</span>
+          <input type="radio" id="ptivate" name="radioRoomType" value="private" />
+          <label className="bg-[#363636] text-[#999999]" htmlFor="private">
+            Private
+          </label>
         </div>
 
         <button
           onClick={(e) => {
             e.preventDefault();
-            console.log("first creation on obj")
+            console.log("first creation on obj");
             dispatch({
               type: "SET_NEW_ROOM",
               newRoom: {
@@ -153,25 +233,28 @@ const NewRoomForm = () => {
                 startTimeMinute: startTimeMinute,
                 startTimeSecound: "00",
                 difficulty: difficulty,
+                roomType: roomType,
                 participant: [
                   { id: "123", solved: Array(noOfQuestions).fill(0) },
                 ],
-                questions:[],
-                winner:""
+                questions: [],
+                winner: "",
               },
             });
             setcreateRoomRequest(!createRoomRequest);
-            
-
 
             axios
-              .post("https://devs-clash.onrender.com/send",  { ...newRoom }, {
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              })
+              .post(
+                "https://devs-clash.onrender.com/send",
+                { ...newRoom },
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                }
+              )
               .then((response) => {
-               console.log(newRoom)
+                console.log(newRoom);
                 console.log(Object.values(response));
                 dispatch({
                   type: "SET_QUESTIONS",

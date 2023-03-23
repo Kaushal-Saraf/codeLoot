@@ -11,7 +11,6 @@ function App() {
       <Route path='/' element={<DisplayPage/>}/>
       <Route path='/createroom' element={<NewRoomForm/>}/>
       <Route path='/joinroom' element={<RoomPage/>}/>
-
     </Routes>
 
   </div>;
