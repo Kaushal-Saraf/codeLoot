@@ -6,12 +6,21 @@ import { java } from "@codemirror/lang-java";
 import { cpp } from "@codemirror/lang-cpp";
 import { python } from "@codemirror/lang-python";
 import axios from "axios";
+import { RemoveScrollBar } from "react-remove-scroll-bar";
 import { dracula } from "@uiw/codemirror-theme-dracula";
 import { useStateValue } from "../context/stateProvider";
 const RoomPageEditorSection = () => {
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState(`import sys;
+
+  def add(a):
+    return 0
+  
+  if __name__ == "__main__":
+    a = int(sys.argv[1])
+    result = int(sys.argv[2])
+    print(add(a) == result)`);
   const [chosenLang, setChosenLang] = useState("python");
-  const [{ newRoom, activeQuestion, fake }, dipatch] = useStateValue();
+  const [{ newRoom, activeQuestion, outputStatus }, dispatch] = useStateValue();
   const userId = "123";
   const onChange = React.useCallback((value, ViewUpdate) => {
     setCode(value);
@@ -32,21 +41,28 @@ const RoomPageEditorSection = () => {
         },
       })
       .then((response) => {
-        console.log("first");
-        // Do something with the response data
-        console.log(response.data);
+        dispatch({
+          type:"SET_OUTPUT_STATUS",
+          outputStatus:true
+        })
+        console.log(response.data.msg[0]);
       })
       .catch((error) => {
         console.error("Error:", error);
+        dispatchEvent({
+          type:"SET_OUTPUT_STATUS",
+          outputStatus:false
+        })
       });
   };
   return (
-    <div className="bg-primary_gray font-monte flex-col border-2 w-[32rem] border-white h-[auto] justify-start px-1 gap-4 pt-[5rem]">
-      <div className="w-auto items-center justify-start flex gap-2 mb-[5px]">
-        <label htmlFor="topic">Language </label>
+    <div className="bg-primary_gray font-monte flex-col w-[32rem] h-[auto] justify-start px-1 gap-4 pt-[4rem]">
+      <div className="w-auto items-center justify-start flex gap-2 ml-[20px] mb-[15px]">
+  
         <select
           id="topic"
           name="topic"
+          className="bg-primary_gray border-[1px] p-[6px]"
           onChange={(e) => {
             setChosenLang(e.target.value);
           }}
@@ -59,7 +75,7 @@ const RoomPageEditorSection = () => {
         </select>
         <div className="ml-auto">00:02:30</div>
       </div>
-
+      <RemoveScrollBar />
       <CodeMirror
         value={`import sys;
 
@@ -68,28 +84,21 @@ def add(a):
 
 if __name__ == "__main__":
   a = int(sys.argv[1])
-  result = int(sys.argv[3])
+  result = int(sys.argv[2])
   print(add(a) == result)
 `}
         height="100%"
         width="30rem"
-        // option={{mode:'python'}}
+       
         theme={dracula}
         onChange={onChange}
-        extensions={[java({})]}
+        extensions={[python({})]}
+       
       ></CodeMirror>
-      {/* <CodeMirror
-        value={""}
-        height="auto"
-        width="30rem"
-        option={{ mode: "text/x-java" }}
-        theme={dracula}
-        onChange={onChange}
-        extensions={[java({})]}
-      ></CodeMirror> */}
+
       <div
         onClick={runCode}
-        className="absolute bottom-[1rem] cursor-pointer bg-primary_green text-black px-4 py-1 rounded-lg font-monte"
+        className="absolute bottom-[1rem] ml-[15px] cursor-pointer py-[6px] px-[36px] text-[16px] font-medium font-inter tracking-wide rounded-md items-center justify-center flex bg-primary_green text-black"
       >
         {" "}
         Submit Now

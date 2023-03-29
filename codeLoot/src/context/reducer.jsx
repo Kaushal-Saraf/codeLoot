@@ -12,7 +12,7 @@ export const initialState = {
   newRoom:[],
   questions:[],
   activeQuestion:0,
- 
+  outputStatus:false
 };
 const reducer = (state, action) => {
     switch (action.type) {
@@ -36,10 +36,10 @@ const reducer = (state, action) => {
             ...state,
             activeQuestion: action.activeQuestion,
           };
-          case "SET_FAKE":
+          case "SET_OUTPUT_STATUS":
           return {
             ...state,
-            fake: action.fake,
+            outputStatus: action.outputStatus,
           };
           
       default:
