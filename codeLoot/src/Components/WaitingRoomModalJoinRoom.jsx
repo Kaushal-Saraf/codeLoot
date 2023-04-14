@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
 import { useStateValue } from "../context/stateProvider";
-const WaitingRoomModal = ({
-  openWaitingRoomModal,
-  onCloseWaitingRoomModal,
+const WaitingRoomModalJoinRoom = ({
+  openWaitingRoomModalJoinRoom,
+  onCloseWaitingRoomModalJoinRoom,
 }) => {
   const [{ newRoom }, dispatch] = useStateValue();
   const [remainingMinute, setRemainingMinute] = useState(0);
@@ -18,7 +17,7 @@ const WaitingRoomModal = ({
     return () => clearTimeout(timer);
   }, []);
 
-  if (!openWaitingRoomModal) return null;
+  if (!openWaitingRoomModalJoinRoom) return null;
   console.log(newRoom)
   return ReactDOM.createPortal(
     <div className="absolute z-10 w-[100vw] flex justify-center h-[100vh] backdrop-blur-sm bg-black/30">
@@ -33,9 +32,9 @@ const WaitingRoomModal = ({
         ) : (
           <div
             className="py-2 px-10 text-[12px] font-poppins tracking-wide rounded-md bg-primary_gray text-white border-2 border-white"
-            onClick={onCloseWaitingRoomModal}
+            onClick={onCloseWaitingRoomModalJoinRoom}
           >
-            Enter Room
+            Enter Blah Blah Room
           </div>
         )}
       </div>
@@ -44,4 +43,4 @@ const WaitingRoomModal = ({
   );
 };
 
-export default WaitingRoomModal;
+export default WaitingRoomModalJoinRoom;

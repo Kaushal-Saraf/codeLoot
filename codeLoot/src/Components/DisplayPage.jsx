@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ActiveRooms from "./ActiveRooms";
 import JoinRoomModal from "./JoinRoomModal";
-import NewRoomForm from "./NewRoomForm";
+
 import { Link, Route, Routes } from "react-router-dom";
-import { BsArrowRightCircle } from "react-icons/bs";
+import { useStateValue } from "../context/stateProvider";
+
 const DisplayPage = () => {
   const [joinRoomRequest, setJoinRoomRequest] = useState(false);
+  const [dispatch, { newRoom }] = useStateValue();
   return (
     <main className="w-[full] h-[auto] pt-[5.25rem] px-[2rem] bg-primary_gray flex flex-col items-center text-white">
       {
@@ -16,6 +18,7 @@ const DisplayPage = () => {
           }}
         />
       }
+
       <h2 className="text-[26px] leading-5 font-semibold">
         You Are Just One Click
       </h2>
@@ -27,7 +30,7 @@ const DisplayPage = () => {
       <div className="flex mt-[30px] gap-5">
         <Link
           to="/createroom"
-          className="py-[6px] px-[36px] text-[16px] font-medium font-inter tracking-wide rounded-md items-center justify-center flex bg-primary_green text-black"
+          className="py-[6px] cursor-pointer px-[36px] text-[16px] font-medium font-inter tracking-wide rounded-md items-center justify-center flex bg-primary_green text-black"
         >
           <p className="text-black">Create Room</p>
           {/* <BsArrowRightCircle className="bg-black"/> */}

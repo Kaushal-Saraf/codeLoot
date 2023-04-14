@@ -5,14 +5,13 @@ const userInfo =
     : localStorage.clear();
 const apiQuestionDataUrl="https://levelup.gitconnected.com/fetch-api-data-with-axios-and-display-it-in-a-react-app-with-hooks-3f9c8fa89e7b"
 
-
- 
 export const initialState = {
   user: userInfo,
   newRoom:[],
   questions:[],
   activeQuestion:0,
-  outputStatus:false
+  outputStatus:false,
+  joinRoomFlag:true
 };
 const reducer = (state, action) => {
     switch (action.type) {
@@ -41,7 +40,11 @@ const reducer = (state, action) => {
             ...state,
             outputStatus: action.outputStatus,
           };
-          
+          case "SET_JOINROOM_FLAG":
+          return {
+            ...state,
+            joinRoomFlag: action.joinRoomFlag,
+          };
       default:
         return state;
     }

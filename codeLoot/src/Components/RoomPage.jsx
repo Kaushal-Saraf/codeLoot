@@ -7,7 +7,7 @@ import WaitingRoomModal from './WaitingRoomModal'
 import { useState } from 'react'
 const RoomPage = () => {
   const [waitingRoomRequest, setWaitingRoomRequest] = useState(true);
-
+  
   return (
     <div className='flex w-full min-h-screen h-[100vh] bg-primary_gray text-primary_green '>
        {

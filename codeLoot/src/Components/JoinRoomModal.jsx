@@ -1,29 +1,44 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../context/stateProvider";
 const JoinRoomModal = ({ open, onClose }) => {
-  const [{},dispatch]=useStateValue()
+  const [{}, dispatch] = useStateValue();
   const navigate = useNavigate();
-  const [enteredRoomCode,setEnteredRoomCode]=useState("")
+  const [enteredRoomCode, setEnteredRoomCode] = useState("");
   if (!open) return null;
   return ReactDOM.createPortal(
     <div className="absolute z-10 w-[100vw] flex justify-center h-[100vh] backdrop-blur-sm bg-black/30">
       <div className="h-[15rem] w-[20rem] bg-primary_gray flex flex-col gap-5 items-center justify-center">
         <div className="text-primary_green font-monte">Enter Room Code</div>
-        <input type="text" onChange={(e)=>{setEnteredRoomCode(e.target.value)
-        console.log(enteredRoomCode)}}></input>
-        <div 
-          onClick={()=>{
-            axios.patch("https://devs-clash.onrender.com/join",{roomId:enteredRoomCode,id:"99"}).then((res)=>{console.log(res)
-          dispatch({
-            type:"SET_QUESTIONS",
-            questions:res.questions
-          })}).catch((err)=>{console.log(err)})
+        <input
+          type="text"
+          onChange={(e) => {
+            setEnteredRoomCode(e.target.value);
+            console.log(enteredRoomCode);
+          }}
+        ></input>
+        <div
+          onClick={() => {
+            axios
+              .patch("https://devs-clash.onrender.com/join", {
+                roomId: enteredRoomCode,
+                id: "99",
+              })
+              .then((res) => {
+                console.log(res);
+                dispatch({
+                  type: "SET_QUESTIONS",
+                  questions: res.data.questions,
+                });
+              })
+              .catch((err) => {
+                console.log(err);
+              });
 
-            navigate("/joinRoom")
+            navigate("/joinRoom");
           }}
           className="py-2 px-10 text-[12px] font-poppins tracking-wide rounded-md bg-primary_green text-black"
         >

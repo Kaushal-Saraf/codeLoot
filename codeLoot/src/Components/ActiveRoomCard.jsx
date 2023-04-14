@@ -1,7 +1,6 @@
 import React from "react";
 import { FiShare2 } from "react-icons/fi";
 import { AiOutlineShareAlt } from "react-icons/ai";
-import BtnGreen from "./UI/BtnGreen";
 import GrpIcon from "../assets/community.svg";
 const ActiveRoomCard = ({ topics, questions, difficulty, duration, price }) => {
   return (
