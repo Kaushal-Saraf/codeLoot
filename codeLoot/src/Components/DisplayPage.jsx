@@ -4,16 +4,22 @@ import JoinRoomModal from "./JoinRoomModal";
 
 import { Link, Route, Routes } from "react-router-dom";
 import { useStateValue } from "../context/stateProvider";
+import { RemoveScrollBar } from "react-remove-scroll-bar";
 
 const DisplayPage = () => {
   const [joinRoomRequest, setJoinRoomRequest] = useState(false);
-  const [dispatch, { newRoom }] = useStateValue();
+  const [{ joinRoomFlag },dispatch] = useStateValue();
+  
   return (
-    <main className="w-[full] h-[auto] pt-[5.25rem] px-[2rem] bg-primary_gray flex flex-col items-center text-white">
+    <main className="w-[100vw] h-[auto] pt-[5.25rem] px-[2rem] bg-primary_gray flex flex-col items-center text-white">
       {
         <JoinRoomModal
           open={joinRoomRequest}
           onClose={() => {
+            dispatch({
+              type:"SET_JOINROOM_FLAG",
+              joinRoomFlag:false
+            })
             setJoinRoomRequest(!joinRoomRequest);
           }}
         />
@@ -38,6 +44,10 @@ const DisplayPage = () => {
         <div
           className="py-[6px] px-[36px] text-[16px] font-medium font-inter tracking-wide rounded-md bg-primary_gray text-white border-2 border-white"
           onClick={() => {
+            dispatch({
+              type:"SET_JOINROOM_FLAG",
+              joinRoomFlag:true
+            })
             setJoinRoomRequest(!joinRoomRequest);
           }}
         >

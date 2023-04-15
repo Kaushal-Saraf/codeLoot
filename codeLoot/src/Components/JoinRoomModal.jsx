@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../context/stateProvider";
 const JoinRoomModal = ({ open, onClose }) => {
-  const [{}, dispatch] = useStateValue();
+  const [{user}, dispatch] = useStateValue();
   const navigate = useNavigate();
   const [enteredRoomCode, setEnteredRoomCode] = useState("");
   if (!open) return null;
@@ -24,15 +23,19 @@ const JoinRoomModal = ({ open, onClose }) => {
           onClick={() => {
             axios
               .patch("https://devs-clash.onrender.com/join", {
+                user_name: user.user_name,
                 roomId: enteredRoomCode,
-                id: "99",
               })
               .then((res) => {
-                console.log(res);
                 dispatch({
                   type: "SET_QUESTIONS",
                   questions: res.data.questions,
                 });
+                console.log(res.data);
+                dispatch({
+                  type:"SET_JOINED_ROOM",
+                  joinedRoom:res.data
+                 })
               })
               .catch((err) => {
                 console.log(err);

@@ -6,7 +6,7 @@ import { v4 as uuid } from "uuid";
 import { BsPencilSquare } from "react-icons/bs";
 import axios from "axios";
 const NewRoomForm = () => {
-  const [{ newRoom, questions }, dispatch] = useStateValue();
+  const [{ newRoom,user, questions }, dispatch] = useStateValue();
   const [createRoomRequest, setcreateRoomRequest] = useState(false);
   const [topic, setTopic] = useState("");
   const [duration, setDuration] = useState("");
@@ -232,9 +232,8 @@ const NewRoomForm = () => {
                 startTimeSecound: "00",
                 difficulty: difficulty,
                 roomType: roomType,
-                participant: [
-                  { id: "123", solved: Array(noOfQuestions).fill(0) },
-                ],
+                participants: [],
+                user_name:user?.user_name,
                 questions: [],
                 winner: "",
               },
@@ -243,7 +242,7 @@ const NewRoomForm = () => {
 
             axios
               .post(
-                "https://devs-clash.onrender.com/send",
+                "https://devs-clash.onrender.com/create",
                 { id: small_id,
                   topic: topic,
                   duration: duration,
@@ -254,9 +253,7 @@ const NewRoomForm = () => {
                   startTimeSecound: "00",
                   difficulty: difficulty,
                   roomType: roomType,
-                  participant: [
-                    { id: "123", solved: Array(noOfQuestions).fill(0) },
-                  ],
+                  user_name:user?.user_name,
                   questions: [],
                   winner: "" },
                 {
@@ -266,8 +263,9 @@ const NewRoomForm = () => {
                 }
               )
               .then((response) => {
-                console.log(newRoom);
-                console.log(Object.values(response));
+                // console.log(newRoom);
+                // console.log(Object.values(response));
+                console.log(response)
                 dispatch({
                   type: "SET_QUESTIONS",
                   questions: Object.values(response.data.questions),

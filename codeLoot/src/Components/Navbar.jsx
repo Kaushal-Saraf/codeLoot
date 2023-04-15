@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { useStateValue } from "../context/stateProvider";
 import LoginPage from "./LoginPage";
+import { useEffect } from "react";
 const Navbar = () => {
   const [openLoginRoomRequest, setOpenLoginRoomRequest] = useState(false);
   const [{ user }, dispatch] = useStateValue();
-
+  const [userName,setUserName]=useState('')
+  useEffect(()=>{
+    setUserName(user?user.name:"Login")
+  },[user])
   return (
     <nav className="bg-primary_black fixed font-monte justify-center text-[18px] flex w-full py-4 px-2">
       {
@@ -43,7 +47,8 @@ const Navbar = () => {
         className="flex cursor-pointer text-[14px] items-center gap-4 w-[20%]"
       >
         <CgProfile className="text_primary_green text-[20px]" />
-        <div>Rick Sanchez</div>
+        <div>{
+        userName}</div>
       </div>
     </nav>
   );

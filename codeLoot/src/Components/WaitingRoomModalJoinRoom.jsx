@@ -5,20 +5,20 @@ const WaitingRoomModalJoinRoom = ({
   openWaitingRoomModalJoinRoom,
   onCloseWaitingRoomModalJoinRoom,
 }) => {
-  const [{ newRoom }, dispatch] = useStateValue();
+  const [{ joinedRoom }, dispatch] = useStateValue();
   const [remainingMinute, setRemainingMinute] = useState(0);
   const [remainingHour, setRemainingHour] = useState(0);
   useEffect(() => {
     const timer = setInterval(() => {
       const TIME = new Date();
-      setRemainingMinute(newRoom.startTimeMinute - TIME.getMinutes());
-      setRemainingHour(newRoom.startTimeHour - TIME.getHours());
+      setRemainingMinute(joinedRoom?.startTimeMinute - TIME.getMinutes());
+      setRemainingHour(joinedRoom?.startTimeHour - TIME.getHours());
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
   if (!openWaitingRoomModalJoinRoom) return null;
-  console.log(newRoom)
+  // console.log(joinedRoom)
   return ReactDOM.createPortal(
     <div className="absolute z-10 w-[100vw] flex justify-center h-[100vh] backdrop-blur-sm bg-black/30">
       <div className="h-[15rem] w-[20rem] bg-primary_gray flex flex-col gap-5 items-center justify-center">
@@ -39,7 +39,7 @@ const WaitingRoomModalJoinRoom = ({
         )}
       </div>
     </div>,
-    document.getElementById("joinRoomPortal")
+    document.getElementById("waitingRoomPortal")
   );
 };
 

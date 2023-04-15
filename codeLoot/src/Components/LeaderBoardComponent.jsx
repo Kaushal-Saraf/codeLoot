@@ -6,7 +6,7 @@ const LeaderBoardComponent = () => {
   const [{ outputStatus }, dispatch] = useStateValue();
   useEffect(() => {
     
-    console.log("working")
+    // console.log("working")
    
   }, [outputStatus])
   

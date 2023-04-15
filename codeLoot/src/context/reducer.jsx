@@ -1,8 +1,10 @@
 
 const userInfo =
-  localStorage.getItem("user") !== "undefined"
-    ? JSON.parse(localStorage.getItem("user"))
+  localStorage.getItem("userData") !== "undefined"
+    ? JSON.parse(localStorage.getItem("userData"))
     : localStorage.clear();
+
+
 const apiQuestionDataUrl="https://levelup.gitconnected.com/fetch-api-data-with-axios-and-display-it-in-a-react-app-with-hooks-3f9c8fa89e7b"
 
 export const initialState = {
@@ -11,7 +13,8 @@ export const initialState = {
   questions:[],
   activeQuestion:0,
   outputStatus:false,
-  joinRoomFlag:true
+  joinRoomFlag:false,
+  joinedRoom:null
 };
 const reducer = (state, action) => {
     switch (action.type) {
@@ -44,6 +47,11 @@ const reducer = (state, action) => {
           return {
             ...state,
             joinRoomFlag: action.joinRoomFlag,
+          };
+          case "SET_JOINED_ROOM":
+          return {
+            ...state,
+            joinedRoom: action.joinedRoom,
           };
       default:
         return state;

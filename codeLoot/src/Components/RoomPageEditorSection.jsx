@@ -20,7 +20,7 @@ const RoomPageEditorSection = () => {
     result = int(sys.argv[2])
     print(add(a) == result)`);
   const [chosenLang, setChosenLang] = useState("python");
-  const [{ newRoom, activeQuestion, outputStatus }, dispatch] = useStateValue();
+  const [{ newRoom, activeQuestion, user }, dispatch] = useStateValue();
   const userId = "123";
   const onChange = React.useCallback((value, ViewUpdate) => {
     setCode(value);
@@ -30,12 +30,12 @@ const RoomPageEditorSection = () => {
     const url = "https://devs-clash.onrender.com/python";
     const body = {
       code: code,
-      id: userId,
+      user_name: user?.user_name,
       roomId: newRoom.id,
       Q: activeQuestion,
     };
     axios
-      .post(url, body, {
+      .patch(url, body, {
         headers: {
           "Content-Type": "application/json",
         },
