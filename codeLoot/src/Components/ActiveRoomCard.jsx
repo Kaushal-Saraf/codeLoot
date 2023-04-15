@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import GrpIcon from "../assets/community.svg";
 import { useStateValue } from "../context/stateProvider";
 const ActiveRoomCard = ({
-  onCardClick,
+
   id,
   topics,
   questions,
